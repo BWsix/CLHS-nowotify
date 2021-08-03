@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/CLHS-nowotify/static/css/main.9bab7603.chunk.css",
+    "main.js": "/CLHS-nowotify/static/js/main.1239c8fe.chunk.js",
+    "runtime-main.js": "/CLHS-nowotify/static/js/runtime-main.7aeba18a.js",
+    "static/js/2.4aa0531a.chunk.js": "/CLHS-nowotify/static/js/2.4aa0531a.chunk.js",
+    "index.html": "/CLHS-nowotify/index.html",
+    "static/js/2.4aa0531a.chunk.js.LICENSE.txt": "/CLHS-nowotify/static/js/2.4aa0531a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7aeba18a.js",
+    "static/js/2.4aa0531a.chunk.js",
+    "static/css/main.9bab7603.chunk.css",
+    "static/js/main.1239c8fe.chunk.js"
+  ]
+}
