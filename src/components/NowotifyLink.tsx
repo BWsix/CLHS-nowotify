@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { remove } from "../helpers/database";
 import { NowotifyType } from "../hooks/useNowotifys";
+import { FormContext } from "../pages/types";
 
 import {
   Card,
@@ -22,21 +23,12 @@ const useStyles = makeStyles({
 });
 
 interface NowotifyLinkProps {
-  link: NowotifyType;
-  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  setAllValues: (
-    name: string,
-    type: "discord" | "line",
-    data: string,
-    id: string
-  ) => void;
+  nowotify: NowotifyType;
 }
 
-export const NowotifyLink: React.FC<NowotifyLinkProps> = ({
-  link,
-  setToggle,
-  setAllValues,
-}) => {
+export const NowotifyLink: React.FC<NowotifyLinkProps> = ({ nowotify }) => {
+  const { formDispatch, setToggleMakeNowotify } = useContext(FormContext);
+
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -45,10 +37,12 @@ export const NowotifyLink: React.FC<NowotifyLinkProps> = ({
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-                {link.name}
+                {nowotify.name}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {link.type === "discord" ? "Discord webhook" : "Line notify"}
+                {nowotify.type === "discord"
+                  ? "Discord webhook"
+                  : "Line notify"}
               </Typography>
             </CardContent>
 
@@ -58,8 +52,8 @@ export const NowotifyLink: React.FC<NowotifyLinkProps> = ({
                 size="medium"
                 color="primary"
                 onClick={() => {
-                  setAllValues(link.name, link.type, link.data, link.id);
-                  setToggle(true);
+                  formDispatch({ type: "update", data: { ...nowotify } });
+                  setToggleMakeNowotify(true);
                 }}
               >
                 Edit
@@ -69,7 +63,7 @@ export const NowotifyLink: React.FC<NowotifyLinkProps> = ({
                 size="medium"
                 color="secondary"
                 onClick={() => {
-                  if (window.confirm("確認刪除")) remove(link.id);
+                  if (window.confirm("確認刪除")) remove(nowotify.id);
                 }}
               >
                 Delete
