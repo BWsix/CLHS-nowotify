@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface MakeLinkProps {
+interface MakeNowotifyProps {
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
   clearAllValues: () => void;
   _name: string;
@@ -37,7 +37,7 @@ interface MakeLinkProps {
   _id: string;
 }
 
-export const MakeLink: React.FC<MakeLinkProps> = ({
+export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
   setToggle,
   clearAllValues,
   _name,

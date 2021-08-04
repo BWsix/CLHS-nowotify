@@ -1,27 +1,27 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../App";
 
-import { useUserLinks } from "../hooks/useUserLinks";
-import { useMakeLInkValues } from "../hooks/useMakeLInkValues";
-import { NowotifyLink, MakeLinkButton, MakeLink } from "../components";
+import { useNowotifys } from "../hooks/useNowotifys";
+import { useMakeNowotifyValues } from "../hooks/useMakeNowotifyValues";
+import { NowotifyLink, MakeNowotifyButton, MakeNowotify } from "../components";
 
 import { CssBaseline, Grid } from "@material-ui/core";
 
 export const Main: React.FC = () => {
-  const [toggleMakeLink, setToggleMakeLink] = useState(false);
+  const [toggleMakeNowotify, setToggleMakeNowotify] = useState(false);
   const { name, type, data, id, setAllValues, clearAllValues } =
-    useMakeLInkValues();
+    useMakeNowotifyValues();
 
   const user = useContext(UserContext);
-  const links = useUserLinks(user.uid);
+  const links = useNowotifys(user.uid);
 
   return (
     <React.Fragment>
       <CssBaseline />
 
-      {toggleMakeLink ? (
-        <MakeLink
-          setToggle={setToggleMakeLink}
+      {toggleMakeNowotify ? (
+        <MakeNowotify
+          setToggle={setToggleMakeNowotify}
           clearAllValues={clearAllValues}
           _name={name}
           _type={type}
@@ -34,11 +34,11 @@ export const Main: React.FC = () => {
             <NowotifyLink
               link={link}
               setAllValues={setAllValues}
-              setToggle={setToggleMakeLink}
+              setToggle={setToggleMakeNowotify}
               key={link.id}
             />
           ))}
-          <MakeLinkButton setToggle={setToggleMakeLink} />
+          <MakeNowotifyButton setToggle={setToggleMakeNowotify} />
         </Grid>
       )}
     </React.Fragment>

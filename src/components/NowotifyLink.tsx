@@ -1,6 +1,6 @@
 import React from "react";
 import { remove } from "../helpers/database";
-import { LinkType } from "../hooks/useUserLinks";
+import { NowotifyType } from "../hooks/useNowotifys";
 
 import {
   Card,
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 });
 
 interface NowotifyLinkProps {
-  link: LinkType;
+  link: NowotifyType;
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
   setAllValues: (
     name: string,

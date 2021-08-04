@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useMakeLInkValues = () => {
+export const useMakeNowotifyValues = () => {
   const [name, setName] = useState("");
   const [type, setType] = useState<"discord" | "line">("discord");
   const [data, setData] = useState("");

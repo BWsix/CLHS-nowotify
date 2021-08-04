@@ -26,11 +26,11 @@ const useStyles = makeStyles({
   },
 });
 
-interface MakeLinkButtonProps {
+interface MakeNowotifyButtonProps {
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const MakeLinkButton: React.FC<MakeLinkButtonProps> = ({
+export const MakeNowotifyButton: React.FC<MakeNowotifyButtonProps> = ({
   setToggle,
 }) => {
   const classes = useStyles();

@@ -1,8 +1,15 @@
-import { MakeLink } from "./MakeLink";
-import { MakeLinkButton } from "./MakeLinkButton";
+import { MakeNowotify } from "./MakeLink";
+import { MakeNowotifyButton } from "./MakeLinkButton";
 import { Navbar } from "./Navbar";
 import { NowotifyLink } from "./NowotifyLink";
 import { Tutorial } from "./Tutorial";
 import { Feature } from "./Feature";
 
-export { MakeLink, MakeLinkButton, Navbar, NowotifyLink, Tutorial, Feature };
+export {
+  MakeNowotify,
+  MakeNowotifyButton,
+  Navbar,
+  NowotifyLink,
+  Tutorial,
+  Feature,
+};

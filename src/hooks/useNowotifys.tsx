@@ -1,31 +1,32 @@
 import { useState, useEffect } from "react";
 import { db } from "../App";
 
-export type LinkType = {
+export type NowotifyType = {
   id: string;
   type: "discord" | "line";
   data: string;
   name: string;
   uid: string;
+  only_pinned: boolean;
 };
 
-export const useUserLinks = (uid: string) => {
-  const [links, setLinks] = useState<LinkType[]>([]);
+export const useNowotifys = (uid: string) => {
+  const [nowotify, setNowotify] = useState<NowotifyType[]>([]);
 
   useEffect(() => {
     return db
       .collection("links")
       .where("uid", "==", uid)
       .onSnapshot((docs) => {
-        const tmp_links: LinkType[] = [];
+        const tmp_links: NowotifyType[] = [];
 
         docs.forEach((doc) => {
-          tmp_links.push({ ...(doc.data() as LinkType), id: doc.id });
+          tmp_links.push({ ...(doc.data() as NowotifyType), id: doc.id });
         });
 
-        setLinks(tmp_links);
+        setNowotify(tmp_links);
       });
   }, []);
 
-  return links;
+  return nowotify;
 };
