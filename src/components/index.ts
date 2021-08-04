@@ -1,5 +1,5 @@
-import { MakeNowotify } from "./MakeLink";
-import { MakeNowotifyButton } from "./MakeLinkButton";
+import { MakeNowotify } from "./MakeNowotify";
+import { MakeNowotifyButton } from "./MakeNowotifyButton";
 import { Navbar } from "./Navbar";
 import { NowotifyLink } from "./NowotifyLink";
 import { Tutorial } from "./Tutorial";

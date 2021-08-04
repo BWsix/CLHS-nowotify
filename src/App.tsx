@@ -7,7 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Login } from "./pages/Login";
 import { Main } from "./pages/Main";
-import { Feature, Navbar } from "./components/index";
+import { Feature, Navbar } from "./components";
 
 import { Container } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";

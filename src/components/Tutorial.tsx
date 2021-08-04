@@ -67,7 +67,7 @@ export const Tutorial: React.FC<TutorialProps> = ({ type }) => {
             className={classes.image}
           />
           <Typography variant="h6" className={classes.step}>
-            5. 繼續完成上方的表格就大功更成了!
+            5. 繼續完成上方的表格就大功告成了!
           </Typography>
           <br />
         </div>

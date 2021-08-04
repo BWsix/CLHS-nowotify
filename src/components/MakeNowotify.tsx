@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../App";
 import { submit } from "../helpers/database";
+import { Tutorial } from "./Tutorial";
+import { FormContext } from "../pages/types";
+import { NowotifyType } from "../hooks/useNowotifys";
 
 import {
   Container,
@@ -16,7 +18,6 @@ import {
   Button,
   makeStyles,
 } from "@material-ui/core";
-import { Tutorial } from "./Tutorial";
 
 const useStyles = makeStyles((theme) => ({
   formOuter: {
@@ -29,31 +30,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface MakeNowotifyProps {
-  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  clearAllValues: () => void;
-  _name: string;
-  _type: "discord" | "line";
-  _data: string;
-  _id: string;
+  formState: NowotifyType;
 }
 
-export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
-  setToggle,
-  clearAllValues,
-  _name,
-  _type,
-  _data,
-  _id,
-}) => {
-  const user = useContext(UserContext);
+export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
+  const { formDispatch, setToggleMakeNowotify } = useContext(FormContext);
 
-  const [name, setName] = useState(_name || "");
-  const [type, setType] = useState<"discord" | "line">(_type || "discord");
-  const [data, setData] = useState(_data || "");
+  const [name, setName] = useState(formState.name);
+  const [type, setType] = useState<"discord" | "line">(formState.type);
+  const [data, setData] = useState(formState.data);
 
   const handle_submit = () => {
     if (!name.length || !data.length) return;
-    submit({ name, type, data, uid: user.uid, id: _id });
+    submit({ name, type, data, uid: formState.uid, id: formState.id });
 
     handle_cancel();
   };
@@ -62,8 +51,8 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
     setName("");
     setType("discord");
     setData("");
-    setToggle((prev) => !prev);
-    clearAllValues();
+    formDispatch({ type: "init" });
+    setToggleMakeNowotify(false);
   };
 
   const classes = useStyles();
@@ -72,7 +61,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
       <CssBaseline />
       <div className={classes.formOuter}>
         <Typography variant="h4">
-          <b>新增 nowotify</b>
+          <b>{formState.id.length ? "更新" : "新增"} nowotify</b>
         </Typography>
 
         <form className={classes.form} noValidate>
@@ -143,7 +132,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
                 disabled={!name.length || !data.length}
                 onClick={handle_submit}
               >
-                {_id.length ? "更新 !" : "新增 !"}
+                {formState.id.length ? "更新 !" : "新增 !"}
               </Button>
             </Grid>
           </Grid>
