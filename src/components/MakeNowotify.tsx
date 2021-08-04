@@ -17,6 +17,8 @@ import {
   TextField,
   Button,
   makeStyles,
+  FormGroup,
+  Checkbox,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,10 +41,18 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
   const [name, setName] = useState(formState.name);
   const [type, setType] = useState<"discord" | "line">(formState.type);
   const [data, setData] = useState(formState.data);
+  const [only_pinned, setOnly_pinned] = useState(formState.only_pinned);
 
   const handle_submit = () => {
     if (!name.length || !data.length) return;
-    submit({ name, type, data, uid: formState.uid, id: formState.id });
+    submit({
+      name,
+      type,
+      data,
+      only_pinned,
+      uid: formState.uid,
+      id: formState.id,
+    });
 
     handle_cancel();
   };
@@ -51,6 +61,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
     setName("");
     setType("discord");
     setData("");
+    setOnly_pinned(false);
     formDispatch({ type: "init" });
     setToggleMakeNowotify(false);
   };
@@ -113,6 +124,22 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
               />
             </Grid>
 
+            <Grid item xs={12}>
+              <FormControl component="fieldset">
+                <FormGroup>
+                  <FormLabel component="legend">通知選項</FormLabel>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={only_pinned}
+                        onChange={() => setOnly_pinned((prev) => !prev)}
+                      />
+                    }
+                    label="只接收釘選公告 (有紅色HOT!標籤的)"
+                  />
+                </FormGroup>
+              </FormControl>
+            </Grid>
             <Grid item xs={6}>
               <Button
                 fullWidth

@@ -8,12 +8,14 @@ export const submit = ({
   name,
   data,
   type,
+  only_pinned,
   uid,
   id,
 }: {
   name: string;
   type: "discord" | "line";
   data: string;
+  only_pinned: boolean;
   uid: string;
   id: string;
 }) => {
@@ -22,6 +24,7 @@ export const submit = ({
       name,
       type,
       data,
+      only_pinned,
       uid,
     });
   } else {
@@ -29,6 +32,7 @@ export const submit = ({
       name,
       type,
       data,
+      only_pinned,
       uid,
     });
   }

@@ -43,6 +43,7 @@ export const NowotifyLink: React.FC<NowotifyLinkProps> = ({ nowotify }) => {
                 {nowotify.type === "discord"
                   ? "Discord webhook"
                   : "Line notify"}
+                {nowotify.only_pinned && " (只接收釘選公告)"}
               </Typography>
             </CardContent>
 
