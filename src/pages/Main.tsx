@@ -15,8 +15,8 @@ import { CssBaseline, Grid, Typography } from "@material-ui/core";
 export const Main: React.FC = () => {
   const [toggleMakeNowotify, setToggleMakeNowotify] = useState(false);
   const { formState, formDispatch } = useHandleForm();
-  const Nowotifys = useNowotifys(formState.uid);
-  const { KEYWORD_TABLE, isLoading, error } = useKeywords();
+  const { nowotifys, isLoadingNowotifys } = useNowotifys(formState.uid);
+  const { KEYWORD_TABLE, isLoading: isLoadingKeywords, error } = useKeywords();
 
   return (
     <FormContext.Provider value={{ setToggleMakeNowotify, formDispatch }}>
@@ -24,9 +24,7 @@ export const Main: React.FC = () => {
         <CssBaseline />
 
         {toggleMakeNowotify ? (
-          !isLoading && (
-            <MakeNowotify formState={formState} KEYWORD_TABLE={KEYWORD_TABLE} />
-          )
+          <MakeNowotify formState={formState} KEYWORD_TABLE={KEYWORD_TABLE} />
         ) : (
           <>
             <Feature />
@@ -35,11 +33,17 @@ export const Main: React.FC = () => {
                 <Typography component="h2" variant="h4" color="textSecondary">
                   <b>Nowotify列表</b>
                 </Typography>
-                {Nowotifys.map((nowotify) => (
-                  <NowotifyLink nowotify={nowotify} key={nowotify.id} />
-                ))}
+                {isLoadingNowotifys ? (
+                  <Typography color="textSecondary">Loading...</Typography>
+                ) : (
+                  nowotifys.map((nowotify) => (
+                    <NowotifyLink nowotify={nowotify} key={nowotify.id} />
+                  ))
+                )}
                 <br />
-                <MakeNowotifyButton setToggle={setToggleMakeNowotify} />
+                {!isLoadingKeywords && (
+                  <MakeNowotifyButton setToggle={setToggleMakeNowotify} />
+                )}
               </Grid>
               <Announcements />
             </Grid>

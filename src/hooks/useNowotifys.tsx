@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../App";
 
-//TODO store this info in a database or whatever place other than this...
-export const KEYWORD_TABLE = [
-  ["標案相關", "標售", "投標", "招標"],
-  ["教師相關", "軍公教", "教育實習", "教師甄選", "公務人員", "報稅"],
-];
-
 export type NowotifyType = {
   id: string;
   type: "discord" | "line";
@@ -18,7 +12,8 @@ export type NowotifyType = {
 };
 
 export const useNowotifys = (uid: string) => {
-  const [nowotify, setNowotify] = useState<NowotifyType[]>([]);
+  const [nowotifys, setNowotify] = useState<NowotifyType[]>([]);
+  const [isLoadingNowotifys, setIsLoading] = useState(true);
 
   useEffect(() => {
     return db
@@ -32,8 +27,9 @@ export const useNowotifys = (uid: string) => {
         });
 
         setNowotify(tmp_links);
+        setIsLoading(false);
       });
   }, []);
 
-  return nowotify;
+  return { nowotifys, isLoadingNowotifys };
 };
