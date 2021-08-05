@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { submit } from "../helpers/database";
 import { Tutorial } from "./Tutorial";
 import { FormContext } from "../pages/types";
@@ -46,6 +46,18 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
   const [blocked_keyword_ids, setBlocked_keyword_ids] = useState(
     formState.blocked_keyword_ids
   );
+
+  useEffect(() => {
+    const preventGoBack = (e: MouseEvent) => {
+      if (e.button === 3) {
+        e.preventDefault();
+        handle_cancel();
+      }
+    };
+
+    window.addEventListener("mousedown", preventGoBack);
+    return () => window.removeEventListener("mousedown", preventGoBack);
+  }, []);
 
   const handle_submit = () => {
     if (!name.length || !data.length) return;
