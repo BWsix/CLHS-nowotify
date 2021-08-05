@@ -14,6 +14,7 @@ const reducer = (state: NowotifyType, action: FormAction): NowotifyType => {
     data: "",
     name: "",
     only_pinned: false,
+    blocked_keyword_ids: [0, 1],
   };
 
   switch (action.type) {
@@ -41,6 +42,7 @@ export const useHandleForm = () => {
     name: "",
     uid: user.uid,
     only_pinned: false,
+    blocked_keyword_ids: [0, 1],
   });
 
   return { formState, formDispatch };

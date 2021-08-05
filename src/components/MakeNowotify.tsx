@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { submit } from "../helpers/database";
 import { Tutorial } from "./Tutorial";
 import { FormContext } from "../pages/types";
-import { NowotifyType } from "../hooks/useNowotifys";
+import { KEYWORD_TABLE, NowotifyType } from "../hooks/useNowotifys";
 
 import {
   Container,
@@ -19,6 +19,7 @@ import {
   makeStyles,
   FormGroup,
   Checkbox,
+  Switch,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,9 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
   const [type, setType] = useState<"discord" | "line">(formState.type);
   const [data, setData] = useState(formState.data);
   const [only_pinned, setOnly_pinned] = useState(formState.only_pinned);
+  const [blocked_keyword_ids, setBlocked_keyword_ids] = useState(
+    formState.blocked_keyword_ids
+  );
 
   const handle_submit = () => {
     if (!name.length || !data.length) return;
@@ -52,6 +56,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
       only_pinned,
       uid: formState.uid,
       id: formState.id,
+      blocked_keyword_ids,
     });
 
     handle_cancel();
@@ -62,6 +67,8 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
     setType("discord");
     setData("");
     setOnly_pinned(false);
+    setBlocked_keyword_ids([0, 1]);
+
     formDispatch({ type: "init" });
     setToggleMakeNowotify(false);
   };
@@ -122,6 +129,41 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
                 value={data}
                 onChange={(e) => setData(e.target.value)}
               />
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">
+                  當公告內容出現以下選取的關鍵字，不要發送通知
+                </FormLabel>
+                <FormGroup>
+                  {KEYWORD_TABLE.map(([keywordTag, ...keywordList], idx) => (
+                    <div key={idx}>
+                      <FormControlLabel
+                        label={keywordTag}
+                        control={
+                          <Switch
+                            name={idx.toString()}
+                            checked={blocked_keyword_ids.includes(idx)}
+                            onChange={() =>
+                              setBlocked_keyword_ids((prev) => {
+                                if (prev.includes(idx)) {
+                                  return prev.filter((id) => id !== idx);
+                                } else {
+                                  return [...prev, idx];
+                                }
+                              })
+                            }
+                          />
+                        }
+                      />
+                      <Typography component="span" color="textSecondary">
+                        ({keywordList.join(", ")})
+                      </Typography>
+                    </div>
+                  ))}
+                </FormGroup>
+              </FormControl>
             </Grid>
 
             <Grid item xs={12}>
