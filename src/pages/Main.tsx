@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { FormContext } from "./types";
-import { useHandleForm, useNowotifys } from "../hooks/";
+import { useHandleForm, useNowotifys, useKeywords } from "../hooks/";
 import { Announcements } from "./contents";
 import {
   NowotifyLink,
@@ -16,6 +16,7 @@ export const Main: React.FC = () => {
   const [toggleMakeNowotify, setToggleMakeNowotify] = useState(false);
   const { formState, formDispatch } = useHandleForm();
   const Nowotifys = useNowotifys(formState.uid);
+  const { KEYWORD_TABLE, isLoading, error } = useKeywords();
 
   return (
     <FormContext.Provider value={{ setToggleMakeNowotify, formDispatch }}>
@@ -23,7 +24,9 @@ export const Main: React.FC = () => {
         <CssBaseline />
 
         {toggleMakeNowotify ? (
-          <MakeNowotify formState={formState} />
+          !isLoading && (
+            <MakeNowotify formState={formState} KEYWORD_TABLE={KEYWORD_TABLE} />
+          )
         ) : (
           <>
             <Feature />

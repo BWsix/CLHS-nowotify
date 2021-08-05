@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { submit } from "../helpers/database";
 import { Tutorial } from "./Tutorial";
 import { FormContext } from "../pages/types";
-import { KEYWORD_TABLE, NowotifyType } from "../hooks/useNowotifys";
+import { NowotifyType } from "../hooks/useNowotifys";
 
 import {
   Container,
@@ -34,9 +34,13 @@ const useStyles = makeStyles((theme) => ({
 
 interface MakeNowotifyProps {
   formState: NowotifyType;
+  KEYWORD_TABLE: string[][];
 }
 
-export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
+export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
+  formState,
+  KEYWORD_TABLE,
+}) => {
   const { formDispatch, setToggleMakeNowotify } = useContext(FormContext);
 
   const [name, setName] = useState(formState.name);
