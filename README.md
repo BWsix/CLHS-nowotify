@@ -26,7 +26,7 @@ typescript-react / material-ui / firebase
 
 3. 填寫表格
 
-   ![](https://i.imgur.com/1XrN0qZ.png)
+   ![](https://i.imgur.com/4Vyn7WE.png)
 
 <details><summary>如何取得Discord webhook url</summary>
 
@@ -47,7 +47,7 @@ typescript-react / material-ui / firebase
 
    ![](https://i.imgur.com/1mKbwQL.png)
 
-5. 繼續完成上方的表格就大功更成了!
+5. 繼續完成上方的表格就完成設定了!
 
 </details>
 
