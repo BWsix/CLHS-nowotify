@@ -2,10 +2,15 @@ import React, { useState } from "react";
 
 import { FormContext } from "./types";
 import { useHandleForm, useNowotifys } from "../hooks/";
-import { NowotifyLink, MakeNowotifyButton, MakeNowotify } from "../components";
+import { Announcements } from "./contents";
+import {
+  NowotifyLink,
+  MakeNowotifyButton,
+  MakeNowotify,
+  Feature,
+} from "../components";
 
 import { CssBaseline, Grid, Typography } from "@material-ui/core";
-import { Announcements } from "./contents";
 
 export const Main: React.FC = () => {
   const [toggleMakeNowotify, setToggleMakeNowotify] = useState(false);
@@ -20,19 +25,22 @@ export const Main: React.FC = () => {
         {toggleMakeNowotify ? (
           <MakeNowotify formState={formState} />
         ) : (
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={6}>
-              <Typography component="h2" variant="h4" color="textSecondary">
-                <b>Nowotify列表</b>
-              </Typography>
-              {Nowotifys.map((nowotify) => (
-                <NowotifyLink nowotify={nowotify} key={nowotify.id} />
-              ))}
-              <br />
-              <MakeNowotifyButton setToggle={setToggleMakeNowotify} />
+          <>
+            <Feature />
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={6}>
+                <Typography component="h2" variant="h4" color="textSecondary">
+                  <b>Nowotify列表</b>
+                </Typography>
+                {Nowotifys.map((nowotify) => (
+                  <NowotifyLink nowotify={nowotify} key={nowotify.id} />
+                ))}
+                <br />
+                <MakeNowotifyButton setToggle={setToggleMakeNowotify} />
+              </Grid>
+              <Announcements />
             </Grid>
-            <Announcements />
-          </Grid>
+          </>
         )}
       </React.Fragment>
     </FormContext.Provider>

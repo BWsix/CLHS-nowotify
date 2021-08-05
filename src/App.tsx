@@ -7,7 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Login } from "./pages/Login";
 import { Main } from "./pages/Main";
-import { Feature, Navbar } from "./components";
+import { Navbar } from "./components";
 
 import { Container } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
@@ -45,7 +45,6 @@ const App: React.FC = () => {
         <UserContext.Provider value={user}>
           <Container maxWidth="lg">
             <Navbar />
-            <Feature />
             <Main />
           </Container>
         </UserContext.Provider>

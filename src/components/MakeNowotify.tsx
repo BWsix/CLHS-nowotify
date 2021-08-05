@@ -48,6 +48,8 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({ formState }) => {
   );
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     const preventGoBack = (e: MouseEvent) => {
       if (e.button === 3) {
         e.preventDefault();
