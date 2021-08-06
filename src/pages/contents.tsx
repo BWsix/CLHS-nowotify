@@ -17,14 +17,25 @@ const screenShotList = [
 const announcements = [
   [
     "功能更新",
+    "2021/8/5",
+    <>
+      新增 "忽略公告" 功能
+      <br />
+      當公告內容出現特定關鍵字時，不要發送通知
+      <br />
+      (預設是忽略標案相關 、教師相關)
+    </>,
+  ],
+  [
+    "功能更新",
     "2021/8/4",
-    <div>
+    <>
       加入"只接收釘選公告"選項
       <br />
       現在可以選擇只接收有"HOT!"標籤的公告了
       <br />
       (預設是接收所有公告)
-    </div>,
+    </>,
   ],
 ];
 
@@ -93,9 +104,7 @@ export const Announcements: React.FC = () => {
                   <Typography variant="subtitle1" color="textSecondary">
                     {date}
                   </Typography>
-                  <Typography variant="subtitle1" paragraph>
-                    {content}
-                  </Typography>
+                  <Typography variant="subtitle1">{content}</Typography>
                 </CardContent>
               </div>
             </Card>

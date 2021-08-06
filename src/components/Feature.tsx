@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     color: theme.palette.common.white,
     marginBottom: theme.spacing(3),
-    backgroundImage: "url(https://i.imgur.com/VJCh79a.png)",
+    backgroundImage: "url(https://i.imgur.com/Bf3la7K.png)",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
