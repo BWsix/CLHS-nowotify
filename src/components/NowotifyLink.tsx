@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { remove } from "../helpers/database";
+import { sendTestMessage } from "../helpers/sendTestMessage";
 import { NowotifyType } from "../hooks/useNowotifys";
 import { FormContext } from "../pages/types";
 
@@ -44,6 +45,18 @@ export const NowotifyLink: React.FC<NowotifyLinkProps> = ({ nowotify }) => {
         </CardContent>
 
         <CardActions>
+          {nowotify.type !== "line" && ( // well... we have some technical problems here
+            <Button
+              variant="contained"
+              size="medium"
+              color="primary"
+              onClick={() => {
+                sendTestMessage(nowotify.type, nowotify.data);
+              }}
+            >
+              發送測試訊息
+            </Button>
+          )}
           <Button
             variant="contained"
             size="medium"
@@ -53,7 +66,7 @@ export const NowotifyLink: React.FC<NowotifyLinkProps> = ({ nowotify }) => {
               setToggleMakeNowotify(true);
             }}
           >
-            Edit
+            編輯
           </Button>
           <Button
             variant="contained"
@@ -63,7 +76,7 @@ export const NowotifyLink: React.FC<NowotifyLinkProps> = ({ nowotify }) => {
               if (window.confirm("確認刪除")) remove(nowotify.id);
             }}
           >
-            Delete
+            刪除
           </Button>
         </CardActions>
       </div>
