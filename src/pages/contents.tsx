@@ -116,6 +116,7 @@ export const Announcements: React.FC = () => {
         component="a"
         target="_blank"
         href="https://github.com/BWsix/CLHS-nowotify"
+        rel="noreferrer"
       >
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
@@ -143,6 +144,7 @@ export const Announcements: React.FC = () => {
         component="a"
         target="_blank"
         href="https://github.com/BWsix/CLHS-nowotify-server"
+        rel="noreferrer"
       >
         <Card className={classes.card}>
           <div className={classes.cardDetails}>

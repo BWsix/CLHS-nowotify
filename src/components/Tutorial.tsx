@@ -76,9 +76,17 @@ export const Tutorial: React.FC<TutorialProps> = ({ type }) => {
 
         <div>
           <Typography variant="h6" className={classes.step}>
-            1. 前往 Line Notify 設定頁面並登入
-            <br />
-            <Link>https://notify-bot.line.me/my/</Link>
+            (這部分只能在電腦設定) <br />
+          </Typography>
+          <Typography variant="h6" className={classes.step}>
+            1. 前往並登入
+            <Link
+              href="https://notify-bot.line.me/my/"
+              rel="noreferrer"
+              color="secondary"
+            >
+              Line Notify 設定頁面
+            </Link>
           </Typography>
           *首次登入會需要在Line輸入驗證碼
           <img
@@ -97,9 +105,26 @@ export const Tutorial: React.FC<TutorialProps> = ({ type }) => {
           <Typography variant="h6" className={classes.step}>
             3. 完成設定後點選 "發行"
           </Typography>
-          *權杖名稱建議填寫 <b>CLHS-nowotify</b>，方便日後辨識
+          <Typography>
+            *權杖名稱建議填寫 <b>CLHS-nowotify</b>，方便日後辨識
+          </Typography>
+          <Typography component="p">
+            <br />
+            可以選擇 "透過1對1聊天接收LINE Notify的通知"
+            <br />
+            直接從 "Line Notify的帳號" 接收通知
+          </Typography>
           <img
-            src="https://i.imgur.com/3Gd1Eer.png"
+            src="https://i.imgur.com/UmLRfyi.png"
+            alt=""
+            className={classes.image}
+          />
+          <Typography component="p">
+            <br />
+            或是選擇一個群組來接收通知
+          </Typography>
+          <img
+            src="https://i.imgur.com/Ydw6fac.png"
             alt=""
             className={classes.image}
           />
@@ -112,8 +137,15 @@ export const Tutorial: React.FC<TutorialProps> = ({ type }) => {
             className={classes.image}
           />
           <Typography variant="h6" className={classes.step}>
-            5. 繼續完成上方的表格後，依照指示將 "LINE Notify"
-            帳號加入群組就完成設定了!
+            5.
+          </Typography>
+          <Typography component="p">
+            如果是選擇 "透過1對1聊天接收LINE Notify的通知"
+            <br /> 到這邊就完成設定了
+            <br />
+            <br /> 如果是選擇 "使用群組接收通知"
+            <br />
+            則需要依照指示將 "LINE Notify" 帳號加入群組
           </Typography>
           <img
             src="https://i.imgur.com/CDYEWJ5.png"
