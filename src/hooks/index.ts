@@ -1,5 +1,5 @@
 import { useHandleForm } from "./useHandleForm";
 import { useNowotifys } from "./useNowotifys";
-import { useKeywords } from "./useKeywords";
+import { useGithubData } from "./useGithubData";
 
-export { useHandleForm, useNowotifys, useKeywords };
+export { useHandleForm, useNowotifys, useGithubData };

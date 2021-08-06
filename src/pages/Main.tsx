@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { FormContext } from "./types";
-import { useHandleForm, useNowotifys, useKeywords } from "../hooks/";
+import { useHandleForm, useNowotifys, useGithubData } from "../hooks/";
 import { Announcements } from "./contents";
 import {
   NowotifyLink,
@@ -16,15 +16,20 @@ export const Main: React.FC = () => {
   const [toggleMakeNowotify, setToggleMakeNowotify] = useState(false);
   const { formState, formDispatch } = useHandleForm();
   const { nowotifys, isLoadingNowotifys } = useNowotifys(formState.uid);
-  const { KEYWORD_TABLE, isLoading: isLoadingKeywords, error } = useKeywords();
+  const { GROUP_TABLE, KEYWORD_TABLE, isLoading, error } = useGithubData();
 
+  if (error) return <>ERROR</>;
   return (
     <FormContext.Provider value={{ setToggleMakeNowotify, formDispatch }}>
       <React.Fragment>
         <CssBaseline />
 
         {toggleMakeNowotify ? (
-          <MakeNowotify formState={formState} KEYWORD_TABLE={KEYWORD_TABLE} />
+          <MakeNowotify
+            formState={formState}
+            KEYWORD_TABLE={KEYWORD_TABLE}
+            GROUP_TABLE={GROUP_TABLE}
+          />
         ) : (
           <>
             <Feature />
@@ -41,7 +46,7 @@ export const Main: React.FC = () => {
                   ))
                 )}
                 <br />
-                {!isLoadingKeywords && (
+                {!isLoading && (
                   <MakeNowotifyButton setToggle={setToggleMakeNowotify} />
                 )}
               </Grid>

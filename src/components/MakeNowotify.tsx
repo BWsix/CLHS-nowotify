@@ -35,11 +35,13 @@ const useStyles = makeStyles((theme) => ({
 interface MakeNowotifyProps {
   formState: NowotifyType;
   KEYWORD_TABLE: string[][];
+  GROUP_TABLE: { id: string; name: string }[];
 }
 
 export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
   formState,
   KEYWORD_TABLE,
+  GROUP_TABLE,
 }) => {
   const { formDispatch, setToggleMakeNowotify } = useContext(FormContext);
 
@@ -50,6 +52,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
   const [blocked_keyword_ids, setBlocked_keyword_ids] = useState(
     formState.blocked_keyword_ids
   );
+  const [group_ids, setGroup_ids] = useState(formState.group);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -75,6 +78,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
       uid: formState.uid,
       id: formState.id,
       blocked_keyword_ids,
+      group: group_ids,
     });
 
     handle_cancel();
@@ -86,6 +90,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
     setData("");
     setOnly_pinned(false);
     setBlocked_keyword_ids([0, 1]);
+    setGroup_ids(["main"]);
 
     formDispatch({ type: "init" });
     setToggleMakeNowotify(false);
@@ -147,6 +152,35 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
                 value={data}
                 onChange={(e) => setData(e.target.value)}
               />
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">公告來源</FormLabel>
+                <FormGroup>
+                  {GROUP_TABLE.map((group, idx) => (
+                    <div key={idx}>
+                      <FormControlLabel
+                        label={group.name}
+                        control={
+                          <Checkbox
+                            checked={group_ids.includes(group.id)}
+                            onChange={() =>
+                              setGroup_ids((prev) => {
+                                if (prev.includes(group.id)) {
+                                  return prev.filter((id) => id !== group.id);
+                                } else {
+                                  return [...prev, group.id];
+                                }
+                              })
+                            }
+                          />
+                        }
+                      />
+                    </div>
+                  ))}
+                </FormGroup>
+              </FormControl>
             </Grid>
 
             <Grid item xs={12}>
@@ -216,7 +250,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
                 fullWidth
                 variant="contained"
                 color="primary"
-                disabled={!name.length || !data.length}
+                disabled={!name.length || !data.length || !group_ids.length}
                 onClick={handle_submit}
               >
                 {formState.id.length ? "更新 !" : "新增 !"}

@@ -9,6 +9,7 @@ export type NowotifyType = {
   uid: string;
   only_pinned: boolean;
   blocked_keyword_ids: number[];
+  group: string[];
 };
 
 export const useNowotifys = (uid: string) => {
