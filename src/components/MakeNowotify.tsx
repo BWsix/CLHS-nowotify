@@ -109,7 +109,9 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <FormControl>
-                <FormLabel component="legend">通知平台</FormLabel>
+                <FormLabel component="legend" required>
+                  通知平台
+                </FormLabel>
                 <RadioGroup
                   value={type}
                   onChange={(e) =>
@@ -135,6 +137,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
                 variant="outlined"
                 fullWidth
                 label="群組名稱"
+                required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -144,6 +147,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
               <TextField
                 variant="outlined"
                 fullWidth
+                required
                 label={
                   type === "discord"
                     ? "Discord Webhook url"
@@ -156,7 +160,9 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
 
             <Grid item xs={12}>
               <FormControl component="fieldset">
-                <FormLabel component="legend">公告來源</FormLabel>
+                <FormLabel component="legend" required>
+                  公告來源 (至少要勾選一項來源)
+                </FormLabel>
                 <FormGroup>
                   {GROUP_TABLE.map((group, idx) => (
                     <div key={idx}>
