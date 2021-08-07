@@ -20,6 +20,7 @@ import {
   FormGroup,
   Checkbox,
   Switch,
+  Link,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +45,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
   GROUP_TABLE,
 }) => {
   const { formDispatch, setToggleMakeNowotify } = useContext(FormContext);
+  const [toggleMoreSettings, setToggleMoreSettings] = useState(false);
 
   const [name, setName] = useState(formState.name);
   const [type, setType] = useState<"discord" | "line">(formState.type);
@@ -126,7 +128,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
                   <FormControlLabel
                     value="line"
                     control={<Radio />}
-                    label="Line"
+                    label="Line (只能從電腦設定)"
                   />
                 </RadioGroup>
               </FormControl>
@@ -158,93 +160,113 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend" required>
-                  公告來源 (至少要勾選一項來源)
-                </FormLabel>
-                <FormGroup>
-                  {GROUP_TABLE.map((group, idx) => (
-                    <div key={idx}>
+            {!toggleMoreSettings ? (
+              <Grid item xs={12}>
+                <Link
+                  color="secondary"
+                  component="h3"
+                  onClick={() => {
+                    setToggleMoreSettings(true);
+                  }}
+                >
+                  顯示更多設定
+                </Link>
+              </Grid>
+            ) : (
+              <>
+                <Grid item xs={12}>
+                  <FormControl component="fieldset">
+                    <FormLabel component="legend" required>
+                      公告來源 (至少要勾選一項來源)
+                    </FormLabel>
+                    <FormGroup>
+                      {GROUP_TABLE.map((group, idx) => (
+                        <div key={idx}>
+                          <FormControlLabel
+                            label={group.name}
+                            control={
+                              <Checkbox
+                                checked={group_ids.includes(group.id)}
+                                onChange={() =>
+                                  setGroup_ids((prev) => {
+                                    if (prev.includes(group.id)) {
+                                      return prev.filter(
+                                        (id) => id !== group.id
+                                      );
+                                    } else {
+                                      return [...prev, group.id];
+                                    }
+                                  })
+                                }
+                              />
+                            }
+                          />
+                        </div>
+                      ))}
+                    </FormGroup>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControl component="fieldset">
+                    <FormLabel component="legend">
+                      當公告內容出現選取的關鍵字，不要發送通知
+                    </FormLabel>
+                    <FormGroup>
+                      {KEYWORD_TABLE.map(
+                        ([keywordTag, ...keywordList], idx) => (
+                          <div key={idx}>
+                            <FormControlLabel
+                              label={keywordTag}
+                              control={
+                                <Switch
+                                  name={idx.toString()}
+                                  checked={blocked_keyword_ids.includes(idx)}
+                                  onChange={() =>
+                                    setBlocked_keyword_ids((prev) => {
+                                      if (prev.includes(idx)) {
+                                        return prev.filter((id) => id !== idx);
+                                      } else {
+                                        return [...prev, idx];
+                                      }
+                                    })
+                                  }
+                                />
+                              }
+                            />
+                            <Typography component="span" color="textSecondary">
+                              ({keywordList.join(", ")})
+                            </Typography>
+                          </div>
+                        )
+                      )}
+                    </FormGroup>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControl component="fieldset">
+                    <FormGroup>
+                      <FormLabel component="legend">通知選項</FormLabel>
                       <FormControlLabel
-                        label={group.name}
                         control={
                           <Checkbox
-                            checked={group_ids.includes(group.id)}
-                            onChange={() =>
-                              setGroup_ids((prev) => {
-                                if (prev.includes(group.id)) {
-                                  return prev.filter((id) => id !== group.id);
-                                } else {
-                                  return [...prev, group.id];
-                                }
-                              })
-                            }
+                            checked={only_pinned}
+                            onChange={() => setOnly_pinned((prev) => !prev)}
                           />
                         }
+                        label="只接收釘選公告 (有紅色HOT!標籤的)"
                       />
-                    </div>
-                  ))}
-                </FormGroup>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">
-                  當公告內容出現以下選取的關鍵字，不要發送通知
-                </FormLabel>
-                <FormGroup>
-                  {KEYWORD_TABLE.map(([keywordTag, ...keywordList], idx) => (
-                    <div key={idx}>
-                      <FormControlLabel
-                        label={keywordTag}
-                        control={
-                          <Switch
-                            name={idx.toString()}
-                            checked={blocked_keyword_ids.includes(idx)}
-                            onChange={() =>
-                              setBlocked_keyword_ids((prev) => {
-                                if (prev.includes(idx)) {
-                                  return prev.filter((id) => id !== idx);
-                                } else {
-                                  return [...prev, idx];
-                                }
-                              })
-                            }
-                          />
-                        }
-                      />
-                      <Typography component="span" color="textSecondary">
-                        ({keywordList.join(", ")})
-                      </Typography>
-                    </div>
-                  ))}
-                </FormGroup>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControl component="fieldset">
-                <FormGroup>
-                  <FormLabel component="legend">通知選項</FormLabel>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={only_pinned}
-                        onChange={() => setOnly_pinned((prev) => !prev)}
-                      />
-                    }
-                    label="只接收釘選公告 (有紅色HOT!標籤的)"
-                  />
-                </FormGroup>
-              </FormControl>
-            </Grid>
+                    </FormGroup>
+                  </FormControl>
+                </Grid>
+              </>
+            )}
             <Grid item xs={6}>
               <Button
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 onClick={handle_cancel}
               >
                 取消
