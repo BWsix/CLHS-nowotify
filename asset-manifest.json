@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CLHS-nowotify/static/css/main.9bab7603.chunk.css",
-    "main.js": "/CLHS-nowotify/static/js/main.438b8ccd.chunk.js",
+    "main.js": "/CLHS-nowotify/static/js/main.ca91b589.chunk.js",
     "runtime-main.js": "/CLHS-nowotify/static/js/runtime-main.7aeba18a.js",
     "static/js/2.66f059a0.chunk.js": "/CLHS-nowotify/static/js/2.66f059a0.chunk.js",
     "index.html": "/CLHS-nowotify/index.html",
@@ -11,6 +11,6 @@
     "static/js/runtime-main.7aeba18a.js",
     "static/js/2.66f059a0.chunk.js",
     "static/css/main.9bab7603.chunk.css",
-    "static/js/main.438b8ccd.chunk.js"
+    "static/js/main.ca91b589.chunk.js"
   ]
 }
