@@ -1,4 +1,4 @@
-# CLHS nowotify - server
+# CLHS nowotify
 
 使用 Discord / Line 及時接收壢中官網公告
 
