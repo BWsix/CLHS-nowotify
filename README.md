@@ -84,7 +84,7 @@ CLHS nowotify 使用 python 伺服器監聽壢中官網
 
 <details><summary>如何取得Line notify token</summary>
 
-1. 前往 Line Notify 設定頁面並登入**(這部分只能在電腦設定)**
+1. 前往 Line Notify 設定頁面並登入 **(這部分只能在電腦設定)**  
    https://notify-bot.line.me/my/  
    \*首次登入會需要在 Line 輸入驗證碼
 
