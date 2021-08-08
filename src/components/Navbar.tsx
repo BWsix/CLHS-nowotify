@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
           CLHS nowotify
         </Typography>
         <Button variant="contained" size="small" onClick={signOut}>
-          Sign out
+          登出
         </Button>
         <Avatar
           alt={user.displayName || ""}

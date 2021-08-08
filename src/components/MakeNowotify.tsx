@@ -61,13 +61,14 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
 
     const preventGoBack = (e: MouseEvent) => {
       if (e.button === 3) {
+        e.stopPropagation();
         e.preventDefault();
         handle_cancel();
       }
     };
 
-    window.addEventListener("mousedown", preventGoBack);
-    return () => window.removeEventListener("mousedown", preventGoBack);
+    window.addEventListener("click", preventGoBack);
+    return () => window.removeEventListener("click", preventGoBack);
   }, []);
 
   const handle_submit = () => {
@@ -165,6 +166,7 @@ export const MakeNowotify: React.FC<MakeNowotifyProps> = ({
                 <Link
                   color="secondary"
                   component="h3"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     setToggleMoreSettings(true);
                   }}
