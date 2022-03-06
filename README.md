@@ -1,9 +1,11 @@
-# CLHS nowotify
+# CLHS nowotify - client
 
 使用 Discord / Line 及時接收壢中官網公告
 
 **前往[設定頁面][clhs_nowotify]**  
-**前往[CLHS nowotify - server][repo_server]**
+**前往[CLHS nowotify - client][repo_client]**  
+**前往[CLHS nowotify - server][repo_server]**  
+**前往[CLHS nowotify - twitter bot][repo_twitter_bot]**
 
 ## 目錄
 
@@ -21,9 +23,7 @@ CLHS nowotify 使用 python 伺服器監聽壢中官網
 
 ### 架構圖
 
-> ![](https://i.imgur.com/JJxBPTl.png)  
-> **client** : react app deployed on Github pages  
-> **server** : python server hosted on Heroku
+> ![](https://i.imgur.com/zMYckwN.png)
 
 ## 特色<a id="features"></a>
 
@@ -123,5 +123,7 @@ CLHS nowotify 使用 python 伺服器監聽壢中官網
 以及所有 CLHS nowotify 的用戶，謝謝你們的支持
 
 [clhs_nowotify]: https://bwsix.github.io/CLHS-nowotify/
+[repo_client]: https://github.com/BWsix/CLHS-nowotify
 [repo_server]: https://github.com/BWsix/CLHS-nowotify-server
+[repo_twitter_bot]: https://github.com/BWsix/CLHS-nowotify-twitter-bot
 [@storiesbang]: https://github.com/storiesbang
